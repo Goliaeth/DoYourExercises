@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import pl.droidsonroids.gif.GifImageView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -70,14 +71,20 @@ class ExerciseFragment : Fragment() {
 
         randomizeExercises()
 
-        nextButton.setOnClickListener {
-            view:View ->
+        nextButton.setOnClickListener { view:View ->
+
             exerciseIndex++
 
             if (exerciseIndex < exerciseSize) {
                 currentExercise = exercises[exerciseIndex]
                 setExercise()
+            } else {
+                view.findNavController().navigate(R.id.action_exerciseFragment_to_wellDoneFragment)
             }
+        }
+
+        exitButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_exerciseFragment_to_tryAgainFragment)
         }
 
         return v
