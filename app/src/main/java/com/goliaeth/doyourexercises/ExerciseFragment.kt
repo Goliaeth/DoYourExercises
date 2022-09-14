@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import pl.droidsonroids.gif.GifImageView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +33,78 @@ class ExerciseFragment : Fragment() {
         }
     }
 
+    data class Exercise(
+        val exerciseType: String,
+        val exerciseCount: Int
+    )
+
+    private val exercises = mutableListOf<Exercise>(
+        Exercise("exercise_one", 8),
+        Exercise("exercise_two", 5),
+        Exercise("exercise_three", 10),
+        Exercise("exercise_four", 15),
+        Exercise("exercise_five", 20),
+    )
+
+    lateinit var nextButton: Button
+    lateinit var exitButton: Button
+    lateinit var imageView: GifImageView
+    lateinit var textView: TextView
+
+    private lateinit var currentExercise: Exercise
+    private var count: Int = 0
+    private var exerciseIndex: Int = 0
+    private var exerciseSize = Math.min((exercises.size + 1) / 2, 3)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercise, container, false)
+        val v = inflater.inflate(R.layout.fragment_exercise, container, false)
+
+        nextButton = v.findViewById(R.id.next_button)
+        exitButton = v.findViewById(R.id.exit_button)
+        imageView = v.findViewById(R.id.exercise_image_view)
+        textView = v.findViewById(R.id.exercise_text_view)
+
+        randomizeExercises()
+
+        nextButton.setOnClickListener {
+            view:View ->
+            exerciseIndex++
+
+            if (exerciseIndex < exerciseSize) {
+                currentExercise = exercises[exerciseIndex]
+                setExercise()
+            }
+        }
+
+        return v
+    }
+
+    private fun randomizeExercises() {
+        exercises.shuffle()
+        exerciseIndex = 0
+        setExercise()
+    }
+
+    private fun setExercise() {
+        currentExercise = exercises[exerciseIndex]
+        count = currentExercise.exerciseCount
+        textView.text = String.format(getString(R.string.exercise_text_view), count)
+        imageView.setImageResource(
+            resources.getIdentifier(
+                currentExercise.exerciseType,
+                "drawable",
+                (activity as AppCompatActivity).packageName
+            )
+        )
+        (activity as AppCompatActivity).supportActionBar?.title = String.format(
+            getString(R.string.title_android_fitness_exercise),
+            exerciseIndex + 1,
+            exerciseSize
+        )
     }
 
     companion object {
