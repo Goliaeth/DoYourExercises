@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Do Your Exercises</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exercise_text_view_tools">10 times</string>
+    <string name="exercise_text_view">%d times</string>
+    <string name="next_button_string">next</string>
+    <string name="exit_button_string">exit</string>
+    <string name="title_android_fitness_exercise">Exercise Number: (%d/%d)</string>
+    <string name="congrats_image_view">congrats</string>
+    <string name="go_button">GO!</string>
+    <string name="try_again_string">try again</string>
+    <string name="next_workout_string">next workout</string>
+    <string name="try_again_description">try again</string>
+    <string name="about_fitness_app">in this app we will learn about navigation.\n\nnavigation will give us a greateview ofour app </string>
+    <string name="about_app_description">about the fitness app</string>
+    <string name="about_string">About</string>
 </resources>
