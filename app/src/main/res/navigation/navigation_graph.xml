@@ -21,19 +21,33 @@
         tools:layout="@layout/fragment_exercise" >
         <action
             android:id="@+id/action_exerciseFragment_to_wellDoneFragment"
-            app:destination="@id/wellDoneFragment" />
+            app:destination="@id/wellDoneFragment"
+            app:popUpTo="@id/exerciseFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_exerciseFragment_to_tryAgainFragment"
-            app:destination="@id/tryAgainFragment" />
+            app:destination="@id/tryAgainFragment"
+            app:popUpTo="@id/exerciseFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/tryAgainFragment"
         android:name="com.goliaeth.doyourexercises.TryAgainFragment"
         android:label="fragment_try_again"
-        tools:layout="@layout/fragment_try_again" />
+        tools:layout="@layout/fragment_try_again" >
+        <action
+            android:id="@+id/action_tryAgainFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment"
+            app:popUpTo="@id/exerciseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/wellDoneFragment"
         android:name="com.goliaeth.doyourexercises.WellDoneFragment"
         android:label="fragment_well_done"
-        tools:layout="@layout/fragment_well_done" />
+        tools:layout="@layout/fragment_well_done" >
+        <action
+            android:id="@+id/action_wellDoneFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment"
+            app:popUpTo="@id/exerciseFragment" />
+    </fragment>
 </navigation>
